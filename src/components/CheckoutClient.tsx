@@ -265,7 +265,10 @@ const CheckoutClient: React.FC<CheckoutClientProps> = ({ projectId }) => {
           </p>
           <p className="text-gray-400 mb-4">Transaction Hash:</p>
           <p className="text-gray-500 font-mono break-all">{transactionHash}</p>
-
+          <p className="text-gray-400 mt-4">
+            If you have any issues, please contact our support team at{" "}
+            <a href="mailto:support@ecotoken.earth" className="text-teal-500 underline">support@ecotoken.earth</a>
+          </p>
           {/* New Button to Navigate to Homepage */}
           <button
             onClick={() => router.push("/")}
