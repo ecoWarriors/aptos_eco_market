@@ -81,16 +81,16 @@ Follow these steps to set up the project locally:
 - **Node.js:** Ensure you have Node.js (v14 or later) installed. You can download it [here](https://nodejs.org/).
 - **Yarn or npm:** Package managers to install dependencies.
 
-### USage
+### Usage
 
-	•	Browse Biodiversity and Carbon Credits: Explore high-quality credits from trusted registries.
-	•	Retire Credits: Easily retire credits directly within the Aptos ecosystem.
-	•	Connect Wallets: Use supported Aptos wallets to authenticate and perform transactions.
-	•	Track Transactions: View and verify your retired credits and associated transactions.
+- Browse Biodiversity and Carbon Credits: Explore high-quality credits from trusted registries.
+- Retire Credits: Easily retire credits directly within the Aptos ecosystem.
+- Connect Wallets: Use supported Aptos wallets to authenticate and perform transactions.
+- Track Transactions: View and verify your retired credits and associated transactions.
 
 ### Acknowledgements
-	•	Regen Network: For providing high-quality biodiversity and carbon credits.
-	•	Aptos: For their robust blockchain infrastructure.
-	•	Open Source Contributors: Special thanks to the developers and contributors of the tools and libraries we used in this project.
+- Regen Network: For providing high-quality biodiversity and carbon credits.
+- Aptos: For their robust blockchain infrastructure.
+- Open Source Contributors: Special thanks to the developers and contributors of the tools and libraries we used in this project.
 
 ### ecoToken: Empowering sustainable action through seamless blockchain integration.##
