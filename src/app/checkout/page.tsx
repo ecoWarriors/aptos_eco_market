@@ -1,6 +1,6 @@
 "use client";
 
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { useWallet } from "@aptos-labs/wallet-adapter-react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
@@ -11,12 +11,14 @@ import { aptosClient } from "@/utils/aptosClient";
 import { useWalletClient } from "@thalalabs/surf/hooks";
 import { COIN_ABI } from "@/utils/coin_abi";
 
+type CheckoutClientProps = {
+  projectId?: string;
+};
+
 const APT_PRICE_API = "https://api.binance.com/api/v3/ticker/price?symbol=APTUSDC";
 
-function CheckoutPage() {
+function CheckoutClient({ projectId }: CheckoutClientProps) {
   const router = useRouter();
-  const searchParams = useSearchParams();
-  const projectId = searchParams.get("id");
   const { connected, account } = useWallet();
   const { client } = useWalletClient();
 
@@ -65,86 +67,87 @@ function CheckoutPage() {
     }
   }, [transferAmount, aptPrice, project]);
 
-// Handle the purchase confirmation
-const handleConfirmPurchase = async () => {
-  if (!client || !account || !project || !transferAmount) {
-    console.error("Missing client, account, project, or transfer amount");
-    return;
-  }
-
-  try {
-    const recipientAddress = project.aptos_wallet;
-    if (!recipientAddress) {
-      console.error("Recipient address (aptos_wallet) is missing");
+  // Handle the purchase confirmation
+  const handleConfirmPurchase = async () => {
+    if (!client || !account || !project || !transferAmount) {
+      console.error("Missing client, account, project, or transfer amount");
       return;
     }
 
-    console.log("Recipient address:", recipientAddress);
-    const amountToSend = BigInt(Math.round(aptAmount * Math.pow(10, 8))); // Convert APT amount to base unit
+    try {
+      const recipientAddress = project.aptos_wallet;
+      if (!recipientAddress) {
+        console.error("Recipient address (aptos_wallet) is missing");
+        return;
+      }
 
-    // Use the client to sign and submit transaction
-    const committedTransaction = await client.useABI(COIN_ABI).transfer({
-      type_arguments: ["0x1::aptos_coin::AptosCoin"],
-      arguments: [recipientAddress as `0x${string}`, amountToSend],
-    });
+      console.log("Recipient address:", recipientAddress);
+      const amountToSend = BigInt(Math.round(aptAmount * Math.pow(10, 8))); // Convert APT amount to base unit
 
-    // Wait for transaction confirmation
-    const executedTransaction = await aptosClient().waitForTransaction({
-      transactionHash: committedTransaction.hash,
-    });
+      // Use the client to sign and submit transaction
+      const committedTransaction = await client.useABI(COIN_ABI).transfer({
+        type_arguments: ["0x1::aptos_coin::AptosCoin"],
+        arguments: [recipientAddress as `0x${string}`, amountToSend],
+      });
 
-    setTransactionHash(executedTransaction.hash);
-    setPurchaseSuccessful(true);
+      // Wait for transaction confirmation
+      const executedTransaction = await aptosClient().waitForTransaction({
+        transactionHash: committedTransaction.hash,
+      });
 
-    queryClient.invalidateQueries({
-      queryKey: ["apt-balance", account?.address],
-    });
+      setTransactionHash(executedTransaction.hash);
+      setPurchaseSuccessful(true);
 
-    toast({
-      title: "Success",
-      description: `Transaction succeeded, hash: ${executedTransaction.hash}`,
-    });
+      queryClient.invalidateQueries({
+        queryKey: ["apt-balance", account?.address],
+      });
 
-    // Send transaction details to /api/ccep
-    const transactionDetails = {
-      projectId: project.ID,
-      aptAmount,
-      usdAmount: transferAmount * project.price,
-      transactionHash: executedTransaction.hash,
-      aptPrice,
-      walletAddress: account?.address,
-      toaddress: recipientAddress,
-    };
+      toast({
+        title: "Success",
+        description: `Transaction succeeded, hash: ${executedTransaction.hash}`,
+      });
 
-    console.log("Sending transaction details:", transactionDetails);
+      // Send transaction details to /api/ccep
+      const transactionDetails = {
+        projectId: project.ID,
+        aptAmount,
+        usdAmount: transferAmount * project.price,
+        transactionHash: executedTransaction.hash,
+        aptPrice,
+        walletAddress: account?.address,
+        toaddress: recipientAddress,
+      };
 
-    const response = await fetch("/api/ccep", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: process.env.NEXT_PUBLIC_AUTH_TOKEN as string,
-      },
-      body: JSON.stringify(transactionDetails),
-    });
+      console.log("Sending transaction details:", transactionDetails);
 
-    if (!response.ok) {
-      throw new Error(`Failed to submit transaction details. Status: ${response.status}`);
+      const response = await fetch("/api/ccep", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: process.env.NEXT_PUBLIC_AUTH_TOKEN as string,
+        },
+        body: JSON.stringify(transactionDetails),
+      });
+
+      if (!response.ok) {
+        throw new Error(`Failed to submit transaction details. Status: ${response.status}`);
+      }
+
+      const result = await response.json();
+      console.log("Transaction details successfully sent to /api/ccep:", result);
+
+      // Remove or comment out the automatic redirection
+      // router.push("/");
+    } catch (err: unknown) {
+      const errorMessage = err instanceof Error ? err.message : "Transaction failed";
+      console.error("Error during transaction:", err);
+      toast({
+        variant: "destructive",
+        title: "Error",
+        description: errorMessage,
+      });
     }
-
-    const result = await response.json();
-    console.log("Transaction details successfully sent to /api/ccep:", result);
-
-    // router.push("/");
-  } catch (err: unknown) {
-    const errorMessage = err instanceof Error ? err.message : "Transaction failed";
-    console.error("Error during transaction:", err);
-    toast({
-      variant: "destructive",
-      title: "Error",
-      description: errorMessage,
-    });
-  }
-};
+  };
 
   return (
     <div className="min-h-screen bg-gray-900 text-white flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
@@ -233,36 +236,37 @@ const handleConfirmPurchase = async () => {
           </div>
         </div>
       )}
-      
+
       {purchaseSuccessful && transactionHash && (
-      <div className="max-w-md w-full bg-gray-800 p-6 rounded-lg shadow-lg text-center">
-        <h2 className="text-2xl font-semibold mb-4 text-teal-500">Purchase Successful!</h2>
-        <p className="text-gray-400 mb-4">
-          Your transaction has been successfully processed. You will receive your Impact NFT shortly.
-        </p>
-        <p className="text-gray-400 mb-4">
-          You can track your NFT's progress at{" "}
-          <a
-          href="https://scan.ecotoken.earth"
-          className="text-teal-500 underline"
-          target="_blank"
-          rel="noopener noreferrer"
-        >scan.ecotoken.earth
-        </a>{" "}
-          by entering the transaction hash.
-        </p>
-        <p className="text-gray-400 mb-4">Transaction Hash:</p>
-        <p className="text-gray-500 font-mono break-all">{transactionHash}</p>
-        
-        {/* New Button to Navigate to Homepage */}
-        <button
-          onClick={() => router.push("/")}
-          className="mt-6 px-4 py-2 bg-teal-500 text-white rounded-lg hover:bg-teal-600 transition-colors duration-200"
-        >
-          Go to Homepage
-        </button>
-      </div>
-    )}
+        <div className="max-w-md w-full bg-gray-800 p-6 rounded-lg shadow-lg text-center">
+          <h2 className="text-2xl font-semibold mb-4 text-teal-500">Purchase Successful!</h2>
+          <p className="text-gray-400 mb-4">
+            Your transaction has been successfully processed. You will receive your Impact NFT shortly.
+          </p>
+          <p className="text-gray-400 mb-4">
+            You can track your NFT's progress at{" "}
+            <a
+              href="https://scan.ecotoken.earth"
+              className="text-teal-500 underline"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              scan.ecotoken.earth
+            </a>{" "}
+            by entering the transaction hash.
+          </p>
+          <p className="text-gray-400 mb-4">Transaction Hash:</p>
+          <p className="text-gray-500 font-mono break-all">{transactionHash}</p>
+
+          {/* New Button to Navigate to Homepage */}
+          <button
+            onClick={() => router.push("/")}
+            className="mt-6 px-4 py-2 bg-teal-500 text-white rounded-lg hover:bg-teal-600 transition-colors duration-200"
+          >
+            Go to Homepage
+          </button>
+        </div>
+      )}
 
       {!isLoading && !error && !project && (
         <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
@@ -274,4 +278,4 @@ const handleConfirmPurchase = async () => {
   );
 }
 
-export default CheckoutPage;
+export default CheckoutClient;
