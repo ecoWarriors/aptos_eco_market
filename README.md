@@ -68,10 +68,6 @@ Experience the **Cross-Chain Eco-Marketplace** live:
 
 [https://aptos.ecoToken.earth](https://aptos.ecoToken.earth)
 
-## Installation
-
-Follow these steps to set up the project locally:
-
 ### Prerequisites
 
 - **Node.js:** Ensure you have Node.js (v14 or later) installed. You can download it [here](https://nodejs.org/).
