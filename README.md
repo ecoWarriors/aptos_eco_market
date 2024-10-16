@@ -1,39 +1,90 @@
-## Create Aptos Dapp Boilerplate Template
+# Cross-Chain Eco-Marketplace: Empowering Biodiversity and Carbon Offset on Aptos
 
-The Boilerplate template provides a starter dapp with all necessary dapp infrastructure and a simple wallet info implementation, transfer APT and a simple message board functionality to send and read a message on chain.
+## Table of Contents
 
-## Read the Boilerplate template docs
-To get started with the Boilerplate template and learn more about the template functionality and usage, head over to the [Boilerplate template docs](https://aptos.dev/en/build/create-aptos-dapp/templates/boilerplate) 
+- [Project Overview](#project-overview)
+- [Problem Statement](#problem-statement)
+- [Solution](#solution)
+- [Advantages](#advantages)
+- [Benefits for the Aptos Blockchain](#benefits-for-the-aptos-blockchain)
+- [Technologies Used](#technologies-used)
+- [Live Demo](#live-demo)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Project Structure](#project-structure)
+- [Contributing](#contributing)
+- [License](#license)
+- [Contact](#contact)
+- [Acknowledgements](#acknowledgements)
 
+## Project Overview
 
-## The Boilerplate template provides:
+Our project introduces an innovative solution that enables Aptos blockchain users to seamlessly retire high-quality biodiversity and carbon credits from other blockchain registries directly within the Aptos ecosystem. By integrating our **Cross Chain Ecological Protocol (CCEP)** with Aptos and partnering with the **Regen Network** for top-tier credits, we create a user-friendly marketplace that empowers anyone to offset their environmental impact natively on Aptos. This initiative makes impactful environmental action—both biodiversity conservation and carbon offsetting—more accessible, transparent, and efficient than ever before.
 
-- **Folder structure** - A pre-made dapp folder structure with a `src` (frontend) and `contract` folders.
-- **Dapp infrastructure** - All required dependencies a dapp needs to start building on the Aptos network.
-- **Wallet Info implementation** - Pre-made `WalletInfo` components to demonstrate how one can use to read a connected Wallet info.
-- **Transfer APT implementation** - Pre-made `transfer` components to send APT to an address.
-- **Message board functionality implementation** - Pre-made `message` components to send and read a message on chain
+**Live URL:** [https://aptos.ecoToken.earth](https://aptos.ecoToken.earth)
 
+## Problem Statement
 
-## What tools the template uses?
+Retiring biodiversity and carbon credits across different blockchains is currently a complex and fragmented process, limiting participation in sustainability efforts. There’s a pressing need for a unified platform that simplifies access to high-quality environmental credits and streamlines the offsetting process for users on Aptos.
 
-- React framework
-- shadcn/ui + tailwind for styling
-- Aptos TS SDK
-- Aptos Wallet Adapter
-- Node based Move commands
+## Solution
 
-## What Move commands are available?
+Our solution bridges the gap between disparate blockchain ecosystems by allowing Aptos users to retire credits from trusted registries like the Regen Network. Leveraging our CCEP, we ensure interoperability, security, and transparency. This not only simplifies the process but also amplifies impact by connecting users to high-quality biodiversity and carbon credits that contribute genuinely to environmental preservation and climate action.
 
-The tool utilizes [aptos-cli npm package](https://github.com/aptos-labs/aptos-cli) that lets us run Aptos CLI in a Node environment.
+## Advantages
 
-Some commands are built-in the template and can be ran as a npm script, for example:
+### Strategic Partnerships
 
-- `npm run move:publish` - a command to publish the Move contract
-- `npm run move:test` - a command to run Move unit tests
-- `npm run move:compile` - a command to compile the Move contract
-- `npm run move:upgrade` - a command to upgrade the Move contract
-- `npm run dev` - a command to run the frontend locally
-- `npm run deploy` - a command to deploy the dapp to Vercel
+Our collaboration with the Regen Network ensures access to verified, high-impact biodiversity and carbon credits, providing users with confidence in the authenticity and effectiveness of their offsets.
 
-For all other available CLI commands, can run `npx aptos` and see a list of all available commands.
+### Proven Success
+
+We’ve successfully helped make the entire Solana blockchain carbon neutral for the past two years, demonstrating our capability and commitment to facilitating meaningful environmental action.
+
+## Benefits for the Aptos Blockchain
+
+- **Enhanced Brand Reputation:** Achieving carbon neutrality and supporting biodiversity conservation positions Aptos as a leader in sustainability, attracting environmentally conscious developers, projects, and users.
+  
+- **Competitive Advantage:** Projects are more likely to build on a blockchain committed to environmental responsibility, expanding the Aptos ecosystem and driving innovation.
+  
+- **Community Engagement:** Promotes a positive image and fosters a community aligned with global sustainability and biodiversity goals, increasing user loyalty and engagement.
+  
+- **Regulatory Compliance:** Proactive offsetting can help Aptos and its projects stay ahead of evolving environmental regulations and standards.
+  
+- **User Empowerment:** By making biodiversity conservation and carbon offsetting effortless on Aptos, we enable more individuals and organizations to participate in sustainability initiatives, fostering a community committed to positive environmental impact.
+  
+- **Enhanced Interoperability:** Our platform unifies efforts across blockchains, promoting a collaborative approach to global environmental and biodiversity challenges, and setting a precedent for cross-chain sustainability initiatives.
+  
+- **Transparency and Trust:** Utilizing Aptos’s robust blockchain technology ensures all transactions are transparent and verifiable, building trust among users and stakeholders.
+
+## Technologies Used
+
+- **Frontend:** Next.js, React, Tailwind CSS
+- **Backend:** Node.js, Next.js API Routes
+- **Blockchain Integration:** Aptos, Regen Network
+- **State Management:** React Query
+- **Wallet Integration:** Aptos Wallet Adapter, Thala Labs Surf Hooks
+- **Utilities:** TypeScript, ESLint, Prettier
+
+## Live Demo
+
+Experience the **Cross-Chain Eco-Marketplace** live:
+
+[https://aptos.ecoToken.earth](https://aptos.ecoToken.earth)
+
+## Installation
+
+Follow these steps to set up the project locally:
+
+### Prerequisites
+
+- **Node.js:** Ensure you have Node.js (v14 or later) installed. You can download it [here](https://nodejs.org/).
+- **Yarn or npm:** Package managers to install dependencies.
+
+### Steps
+
+1. **Clone the Repository**
+
+   ```bash
+   git clone https://github.com/yourusername/your-repo-name.git
+   cd your-repo-name
