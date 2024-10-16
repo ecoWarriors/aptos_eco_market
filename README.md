@@ -62,6 +62,7 @@ We’ve successfully helped make the entire Solana blockchain carbon neutral for
 - **Frontend:** Next.js, React, Tailwind CSS
 - **Backend:** Node.js, Next.js API Routes
 - **Blockchain Integration:** Aptos, Regen Network
+- **CCEP - Cross Chain Ecological Protocol:** ecoToken's cross-chain solution 
 - **State Management:** React Query
 - **Wallet Integration:** Aptos Wallet Adapter, Thala Labs Surf Hooks
 - **Utilities:** TypeScript, ESLint, Prettier
