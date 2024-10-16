@@ -93,4 +93,4 @@ Follow these steps to set up the project locally:
 - Aptos: For their robust blockchain infrastructure.
 - Open Source Contributors: Special thanks to the developers and contributors of the tools and libraries we used in this project.
 
-### ecoToken: Empowering sustainable action through seamless blockchain integration.##
+### ecoToken: Empowering sustainable action through seamless blockchain integration.
