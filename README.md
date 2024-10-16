@@ -9,7 +9,6 @@
 - [Benefits for the Aptos Blockchain](#benefits-for-the-aptos-blockchain)
 - [Technologies Used](#technologies-used)
 - [Live Demo](#live-demo)
-- [Installation](#installation)
 - [Usage](#usage)
 - [Acknowledgements](#acknowledgements)
 

@@ -249,10 +249,10 @@ const CheckoutClient: React.FC<CheckoutClientProps> = ({ projectId }) => {
         <div className="max-w-md w-full bg-gray-800 p-6 rounded-lg shadow-lg text-center">
           <h2 className="text-2xl font-semibold mb-4 text-teal-500">Purchase Successful!</h2>
           <p className="text-gray-400 mb-4">
-            Your transaction has been successfully processed. You will receive your Impact NFT shortly.
+            You will receive an Impact NFT Certificate in your wallet.
           </p>
           <p className="text-gray-400 mb-4">
-            You can track your NFT's progress at{" "}
+            Track your impact at{" "}
             <a
               href="https://scan.ecotoken.earth"
               className="text-teal-500 underline"
@@ -266,7 +266,7 @@ const CheckoutClient: React.FC<CheckoutClientProps> = ({ projectId }) => {
           <p className="text-gray-400 mb-4">Transaction Hash:</p>
           <p className="text-gray-500 font-mono break-all">{transactionHash}</p>
           <p className="text-gray-400 mt-4">
-            If you have any issues, please contact our support team at{" "}
+            For any issues, contact our support team at{" "}
             <a href="mailto:support@ecotoken.earth" className="text-teal-500 underline">support@ecotoken.earth</a>
           </p>
           {/* New Button to Navigate to Homepage */}
