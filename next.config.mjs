@@ -3,8 +3,7 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
-  distDir: "./dist", // Changes the build output directory to `./dist/`.
-  basePath: process.env.NEXT_PUBLIC_BASE_PATH, // Sets the base path to `/some-base-path`.
+  basePath: process.env.NEXT_PUBLIC_BASE_PATH || '', // Sets the base path if provided, else empty
 };
 
 export default nextConfig;
